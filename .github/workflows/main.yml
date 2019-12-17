@@ -1,0 +1,49 @@
+name: Generate Binaries
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: make output directory if needed
+      run: mkdir bins
+    - name: download armhf toolchain
+      run: wget https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
+    - name: unpack armhf toolchain
+      run: tar xf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
+    - name: build armhf binary
+      run: make CROSS_COMPILE="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
+    - name: copy armhf bin to output directory
+      run: cp bin/phytool bins/phytool-armhf
+    - name: make clean
+      run: make clean
+    - name: download armel toolchain
+      run: wget https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabi/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz
+    - name: unpack armel toolchain
+      run: tar xf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz
+    - name: build armel binary
+      run: make CROSS_COMPILE="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-"
+    - name: copy armel bin to output directory
+      run: cp bin/phytool bins/phytool-armel
+    - name: make clean
+      run: make clean
+    - name: build amd64 binary
+      run: make
+    - name: copy arm64 bin to output directory
+      run: cp bin/phytool bins/phytool-amd64
+    - name: set git user name
+      run: git config user.name "workflow@github" 
+    - name: set git user email
+      run: git config user.email "workflow@github"
+    - name: add new files to repo if needed
+      run: git add bins/*
+    - name: commit new files
+      run: git commit -a -m "commit binaries built from latest source"
+#    - name: push changes
+#      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
+
+
