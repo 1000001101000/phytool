@@ -9,6 +9,10 @@ PKG     = $(NAME)-$(VERSION)
 ARCHIVE = $(PKG).tar.xz
 APPLETS = mv6tool
 
+CROSS_COMPILE ?=
+CC = $(CROSS_COMPILE)gcc
+LD = $(CROSS_COMPILE)gcc
+
 PREFIX ?= /usr/local/
 CFLAGS ?= -Wall -Wextra -Werror
 LDLIBS  = 
