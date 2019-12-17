@@ -43,7 +43,7 @@ jobs:
       run: git add bins/*
     - name: commit new files
       run: git commit -a -m "commit binaries built from latest source"
-#    - name: push changes
-#      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
+    - name: push changes
+      run: git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:master
 
 
