@@ -18,7 +18,7 @@ jobs:
     - name: build armhf binary
       run: make PREFIX="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
     - name: copy armhf bin to output directory
-      run: cp bin/phytool bins/phytool-armhf
+      run: cp phytool phytool-armhf
     - name: make clean
       run: make clean
     - name: download armel toolchain
@@ -28,7 +28,7 @@ jobs:
     - name: build armel binary
       run: make PREFIX="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-"
     - name: copy armel bin to output directory
-      run: cp bin/phytool bins/phytool-armel
+      run: cp phytool bins/phytool-armel
     - name: make clean
       run: make clean
     - name: build amd64 binary
