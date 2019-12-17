@@ -23,7 +23,7 @@ jobs:
     #- name: build armhf binary
     #  run: make CROSS_COMPILE="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
     - name: build armhf binary
-      run: make CROSS_COMPILE="arm-linux-gnueabihf-"
+      run: make CROSS_COMPILE="arm-linux-gnueabihf-" CFLAGS="-Wall -Wextra -Werror -static"
     - name: copy armhf bin to output directory
       run: cp phytool bins/phytool-armhf
     - name: make clean
