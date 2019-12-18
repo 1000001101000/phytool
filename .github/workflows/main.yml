@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-
+     ##results in binaries that work with Debian Stretch/Buster
     runs-on: ubuntu-16.04
 
     steps:
@@ -15,26 +15,14 @@ jobs:
       run: sudo apt-get update || exit 0
     - name: ensure build packages are installed
       run: sudo apt-get install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi 
-   
-   # - name: download armhf toolchain
-   #   run: wget https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
-   # - name: unpack armhf toolchain
-   #   run: tar xf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
-   # - name: build armhf binary
-   #   run: make CROSS_COMPILE="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
     - name: build armhf binary
-      run: make CROSS_COMPILE="arm-linux-gnueabihf-" #CFLAGS="-Wall -Wextra -Werror -static" LDFLAGS="-static"
+      run: make CROSS_COMPILE="arm-linux-gnueabihf-"
     - name: copy armhf bin to output directory
       run: cp phytool bins/phytool-armhf
     - name: make clean
       run: make clean
- #   - name: download armel toolchain
- #     run: wget https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabi/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz
- #   - name: unpack armel toolchain
- #     run: tar xf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi.tar.xz
     - name: build armel binary
       run: make CROSS_COMPILE="arm-linux-gnueabi-"
- #     run: make CROSS_COMPILE="gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabi/bin/arm-linux-gnueabi-" CFLAGS="-Wall -fPIE -fPIC" LDFLAGS="-pie"
     - name: copy armel bin to output directory
       run: cp phytool bins/phytool-armel
     - name: make clean
