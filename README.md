@@ -1,3 +1,5 @@
+So far this fork only includes changes to the Makefile to support cross compiling and a github actions workflow for generating binaries for various platforms which I use on other projects.
+
 phytool
 =======
 
